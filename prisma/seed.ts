@@ -1,17 +1,14 @@
 import  { PrismaClient } from '@prisma/client';
+import { hashPassword } from '../src/utils/auth';
 const prisma = new PrismaClient();
 
 async function main() {
-    
-    await prisma.users.create({
-        data:{
-            firstname: "Anthony"
-        }
-    })
 
     await prisma.users.create({
         data:{
-            firstname: "Laurent"
+            firstname: "admin",
+            email: "admin@admin.fr",
+            password: await hashPassword('admin')
         }
     })
 }
